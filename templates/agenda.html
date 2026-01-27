@@ -1,0 +1,24 @@
+{%extend "base.html"%}
+
+{% block content %}
+<form>
+    <imput type="text" name="titulo-tarefa"
+    id= "titulo-tarefa" placeholder="titulo-tarefa"
+    required>
+   <imput  type="text" name="data-conclusao"
+   id="data-conclusao">
+   <button type="submit">Adicionar</button>
+
+
+ </form>
+ <p>{{tarefa.titulo_tarefa}} - {{tarefa.data_conclusao }}</p>
+{%endblock%}
+
+<!---
+get -> "pega" (recupera/obtém) as informações()
+POST -> "envia" (cadastra/inclui/adiciona) as informações
+UPDATE/PATCH -> "atualiza" as informações (UPDATE)
+delete -> "apaga" as informações (delete)
+
+Crud 
+-->
