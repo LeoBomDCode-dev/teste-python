@@ -11,7 +11,23 @@
 
 
  </form>
- <p>{{tarefa.titulo_tarefa}} - {{tarefa.data_conclusao }}</p>
+
+ <h2 class="mt-3">Lista de Tarefas</h2>
+
+{% if tarefas %}
+
+<ul>
+  {% for tarefa in tarefas %}
+    <li>{{tarefa.titulo_tarefa}} - {{tarefa.data_conclusao }}</li>
+    {% endfor %}
+</ul>
+
+{% else %}
+
+{% endif %}
+
+{% endblock %}
+
 {%endblock%}
 
 <!---
