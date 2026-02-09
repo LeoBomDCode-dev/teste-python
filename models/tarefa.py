@@ -1,5 +1,5 @@
-from models.database import Database
-from typing import Self, Any, Optional
+from models.database import Database, Cursor, id_tarefa
+from typing import Self, Any, Optional, cls
 
 class Tarefa:
     def __init__(self: Self, titulo_tarefa: str, data_conclusão: str = None, id: int = None) -> None:
@@ -31,11 +31,22 @@ class Tarefa:
         with Database('./data/tarefas.sqlite3') as db:
           query = 'SELECT titulo_tarefa, data_conclusao FROM tarefas;'
           resultados = list[Any] = db.buscar_tudo (query)
-          tarefas: list[Self] = [ Tarefa(titulo, data) for titulo, data in resultados]
+          tarefas: list[Self] = [cls(titulo, data, id) for titulo, data, id in resultados]
           return tarefas 
         
     def excluir_tarefa(self) -> Cursor:
        with Database('./data/tarefas.sqlite3') as db:
           query: str = 'DELETE FROM tarefas WHERE id = ?;'
-          params: tuple = (self )
+          params: tuple = (self.id_tarefa,)
+          resultado: Cursor = db.executar(query, params)
+          return resultado
+       
+    def atualizar_tarefa(self) -> Cursor:
+       with Database('./data/tarefas.sqlite3') as db:
+        query: str = 'UPDATE tarefas SET titulo_tareda = ?, data_conclusao = ? where id'
+        params: tuple = (self.titulo_tarefa, self.data_conclusao, self.id_tarefa)
+        resultado: Cursor = db.executar(query, params)
+        return resultado
+
+       
 

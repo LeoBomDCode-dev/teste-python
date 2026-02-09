@@ -1,4 +1,4 @@
-from sqlite3 import Connection, connect, Cursor
+from sqlite3 import Connection, connect, Cursor, tb
 from types import TracebackType
 from typing import Any, Self, Optional, Type
 import traceback
