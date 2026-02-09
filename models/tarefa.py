@@ -1,10 +1,11 @@
 from models.database import Database
-from typing import Self, Any
+from typing import Self, Any, Optional
 
 class Tarefa:
     def __init__(self: Self, titulo_tarefa: str, data_conclusão: str = None, id: int = None) -> None:
         self.titulo_tarefa: str = titulo_tarefa
         self.data_conclusao: str = data_conclusão
+        self.id_tarefa: Optional[int] = id_tarefa
         self.id: int = id
 
     @classmethod
@@ -12,7 +13,7 @@ class Tarefa:
         with Database ('./data/tarefas.sqlite3') as db:
             query: str = 'SELECT titulo_tarefa, data_conclusao FROM tarefas WHERE id = ?;'
             params: tuple = (id,)
-            resultado db.buscar_tudo(query, params)
+            resultado: list[Any] = db.buscar_tudo(query, params)
 
             [[titulo, data]] = resultado
         
